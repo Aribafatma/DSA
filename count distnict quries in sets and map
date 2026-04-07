@@ -1,0 +1,45 @@
+#include <iostream>
+#include <unordered_map>
+using namespace std;
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
+
+    int Q;
+    cin >> Q;
+
+    unordered_map<long long, int> freq;
+    int distinct = 0;
+
+    while (Q--) {
+        int type;
+        cin >> type;
+
+        if (type == 1) {
+            long long x;
+            cin >> x;
+            if (freq[x] == 0) distinct++;
+            freq[x]++;
+        }
+        else if (type == 2) {
+            long long x;
+            cin >> x;
+            if (freq[x] > 0) {
+                freq[x]--;
+                if (freq[x] == 0) distinct--;
+            }
+        }
+        else if (type == 3) {
+            cout << distinct << "\n";
+        }
+        else if (type == 4) {
+            long long x;
+            cin >> x;
+            if (freq[x] > 0) cout << "YES\n";
+            else cout << "NO\n";
+        }
+    }
+
+    return 0;
+}
