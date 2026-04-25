@@ -1,0 +1,27 @@
+#include <iostream>
+
+using namespace std;
+
+int main() {
+    // Use long long for N up to 10^18
+    long long N;
+    if (!(cin >> N)) return 0;
+
+    long long current_power = 1;
+
+    while (current_power <= N) {
+        cout << current_power;
+
+        // Check if the next power of 2 will exceed N 
+        // This also prevents potential overflow for very large N
+        if (current_power > N / 2) {
+            break;
+        }
+
+        current_power *= 2;
+        cout << " ";
+    }
+
+    cout << endl;
+    return 0;
+}
