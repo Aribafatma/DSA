@@ -1,0 +1,31 @@
+#include <iostream>
+#include <set>
+using namespace std;
+
+// Helper function to check if all digits are distinct
+bool isBeautiful(int year) {
+    set<int> digits;
+    while (year > 0) {
+        int d = year % 10;
+        if (digits.count(d)) return false; // duplicate digit found
+        digits.insert(d);
+        year /= 10;
+    }
+    return true;
+}
+
+int main() {
+    int y;
+    cin >> y;
+
+    // Keep checking the next year until we find a beautiful one
+    while (true) {
+        y++;
+        if (isBeautiful(y)) {
+            cout << y << endl;
+            break;
+        }
+    }
+
+    return 0;
+}
