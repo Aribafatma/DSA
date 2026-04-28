@@ -1,0 +1,41 @@
+#include <iostream>
+
+using namespace std;
+
+int main() {
+    // Optimize I/O
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+
+    long long N;
+    int Q;
+    if (!(cin >> N >> Q)) return 0;
+
+    while (Q--) {
+        int t, i;
+        cin >> t >> i;
+
+        if (t == 1) {
+            // Check the i-th bit
+            if ((N >> i) & 1LL) {
+                cout << "YES" << "\n";
+            } else {
+                cout << "NO" << "\n";
+            }
+        } else if (t == 2) {
+            // Set the i-th bit
+            N |= (1LL << i);
+            cout << N << "\n";
+        } else if (t == 3) {
+            // Unset the i-th bit
+            N &= ~(1LL << i);
+            cout << N << "\n";
+        } else if (t == 4) {
+            // Toggle the i-th bit
+            N ^= (1LL << i);
+            cout << N << "\n";
+        }
+    }
+
+    return 0;
+}
