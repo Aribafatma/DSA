@@ -1,0 +1,21 @@
+#include <iostream>
+#include <algorithm>
+
+using namespace std;
+
+int main() {
+    long long a, b, c;
+    
+    // Read the three integers
+    if (cin >> a >> b >> c) {
+        // Find min and max using initializer lists
+        long long min_val = min({a, b, c});
+        long long max_val = max({a, b, c});
+
+        // Print output in the required format
+        cout << "Min = " << min_val << endl;
+        cout << "Max = " << max_val << endl;
+    }
+    
+    return 0;
+}
