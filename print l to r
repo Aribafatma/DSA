@@ -1,0 +1,22 @@
+#include <iostream>
+
+using namespace std;
+
+int main() {
+    // Optimize input and output operations
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+
+    int L, R;
+    
+    // Read the two integers L and R
+    if (cin >> L >> R) {
+        // Loop from L to R inclusive
+        for (int i = L; i <= R; ++i) {
+            cout << i << (i == R ? "" : " ");
+        }
+        cout << endl;
+    }
+
+    return 0;
+}
