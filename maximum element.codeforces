@@ -1,0 +1,33 @@
+#include <iostream>
+#include <algorithm>
+#include <vector>
+
+using namespace std;
+
+int main() {
+    // Optimizing I/O operations
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+
+    int N;
+    if (!(cin >> N)) return 0;
+
+    // Use long long to safely handle values up to 10^9
+    long long max_val;
+    long long current_val;
+
+    // Read the first element to initialize max_val
+    cin >> max_val;
+
+    // Iterate through the remaining N-1 elements
+    for (int i = 1; i < N; ++i) {
+        cin >> current_val;
+        if (current_val > max_val) {
+            max_val = current_val;
+        }
+    }
+
+    cout << max_val << endl;
+
+    return 0;
+}
