@@ -1,0 +1,43 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+// Recursive function to print array elements
+void printArray(const vector<int>& arr, int n, int index) {
+    // Base case: if we've reached the end of the array
+    if (index == n) {
+        return;
+    }
+
+    // Print current element
+    cout << arr[index];
+
+    // Print a space if it's not the last element
+    if (index < n - 1) {
+        cout << " ";
+    }
+
+    // Recursive call for the next index
+    printArray(arr, n, index + 1);
+}
+
+int main() {
+    // Optimize I/O
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+
+    int N;
+    if (!(cin >> N)) return 0;
+
+    vector<int> A(N);
+    for (int i = 0; i < N; ++i) {
+        cin >> A[i];
+    }
+
+    // Start recursion from index 0
+    printArray(A, N, 0);
+    cout << endl;
+
+    return 0;
+}
