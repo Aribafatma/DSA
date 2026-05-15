@@ -1,0 +1,36 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main() {
+    // Optimize I/O operations
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+
+    int N;
+    if (!(cin >> N)) return 0;
+
+    // Use long long to handle the range -10^18 to 10^18 for X
+    vector<long long> A(N);
+    for (int i = 0; i < N; ++i) {
+        cin >> A[i];
+    }
+
+    long long X;
+    cin >> X;
+
+    int lastPos = -1;
+
+    // Iterate backwards to find the last occurrence efficiently
+    for (int i = N - 1; i >= 0; --i) {
+        if (A[i] == X) {
+            lastPos = i + 1; // Convert 0-based index to 1-based index
+            break;           // Stop once the last occurrence is found
+        }
+    }
+
+    cout << lastPos << endl;
+
+    return 0;
+}
