@@ -1,0 +1,44 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+/**
+ * @param n Total number of stairs to climb.
+ * @param current_sum The current number of stairs climbed.
+ * @param path Stores the sequence of jumps taken.
+ */
+void findPaths(int n, int current_sum, vector<int>& path) {
+    // Base Case: We reached exactly N steps
+    if (current_sum == n) {
+        for (int i = 0; i < path.size(); ++i) {
+            cout << path[i] << (i == path.size() - 1 ? "" : " ");
+        }
+        cout << endl;
+        return;
+    }
+
+    // Try jump of 1 step first (for lexicographical order)
+    if (current_sum + 1 <= n) {
+        path.push_back(1);
+        findPaths(n, current_sum + 1, path);
+        path.pop_back(); // Backtrack
+    }
+
+    // Try jump of 2 steps
+    if (current_sum + 2 <= n) {
+        path.push_back(2);
+        findPaths(n, current_sum + 2, path);
+        path.pop_back(); // Backtrack
+    }
+}
+
+int main() {
+    int N;
+    if (!(cin >> N)) return 0;
+
+    vector<int> path;
+    findPaths(N, 0, path);
+
+    return 0;
+}
