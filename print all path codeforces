@@ -1,0 +1,44 @@
+#include <iostream>
+#include <string>
+#include <vector>
+
+using namespace std;
+
+int N, M;
+
+/**
+ * Recursive function to find all paths.
+ * @param r Current row
+ * @param c Current column
+ * @param path String representing the moves taken so far
+ */
+void findPaths(int r, int c, string path) {
+    // Base case: If we reached the bottom-right cell, print the path
+    if (r == N && c == M) {
+        cout << path << "\n";
+        return;
+    }
+
+    // Try moving Right (R) if we haven't reached the right boundary
+    if (c < M) {
+        findPaths(r, c + 1, path + 'R');
+    }
+
+    // Try moving Down (D) if we haven't reached the bottom boundary
+    if (r < N) {
+        findPaths(r + 1, c, path + 'D');
+    }
+}
+
+int main() {
+    // Fast I/O
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+
+    if (!(cin >> N >> M)) return 0;
+
+    // Start recursion from (1, 1) with an empty path string
+    findPaths(1, 1, "");
+
+    return 0;
+}
