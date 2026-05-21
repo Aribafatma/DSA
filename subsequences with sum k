@@ -1,0 +1,59 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+/**
+ * Problem: F. Subsequences With Sum K
+ * Approach: Bitmask Brute Force (O(2^n * n))
+ * Since n <= 16, 2^16 = 65,536 iterations is well within the 1s time limit.
+ */
+
+int main() {
+    // Optimize I/O operations
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+
+    int n;
+    long long K;
+    if (!(cin >> n >> K)) return 0;
+
+    vector<long long> A(n);
+    for (int i = 0; i < n; ++i) {
+        cin >> A[i];
+    }
+
+    vector<vector<long long>> valid_subsequences;
+
+    // Iterate through all 2^n possible subsets using bitmasking
+    for (int mask = 0; mask < (1 << n); ++mask) {
+        long long current_sum = 0;
+        vector<long long> current_subsequence;
+        
+        for (int i = 0; i < n; ++i) {
+            // Check if the i-th element is included in the current subsequence
+            if ((mask >> i) & 1) {
+                current_sum += A[i];
+                current_subsequence.push_back(A[i]);
+            }
+        }
+
+        if (current_sum == K) {
+            valid_subsequences.push_back(current_subsequence);
+        }
+    }
+
+    // Output the total count
+    cout << valid_subsequences.size() << "\n";
+
+    // Output each valid subsequence
+    for (const auto& sub : valid_subsequences) {
+        for (size_t i = 0; i < sub.size(); ++i) {
+            cout << sub[i] << (i == sub.size() - 1 ? "" : " ");
+        }
+        // This will print an empty line for the empty subsequence if it's valid
+        cout << "\n";
+    }
+
+    return 0;
+}
