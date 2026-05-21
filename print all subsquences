@@ -1,0 +1,46 @@
+#include <iostream>
+#include <vector>
+#include <string>
+
+using namespace std;
+
+int N, M;
+int grid[11][11];
+
+void findPaths(int r, int c, string path) {
+    // Base Case: Reached the bottom-right cell
+    if (r == N - 1 && c == M - 1) {
+        cout << path << endl;
+        return;
+    }
+
+    // Move Right (R)
+    if (c + 1 < M && grid[r][c + 1] == 0) {
+        findPaths(r, c + 1, path + 'R');
+    }
+
+    // Move Down (D)
+    if (r + 1 < N && grid[r + 1][c] == 0) {
+        findPaths(r + 1, path + 'D');
+    }
+}
+
+int main() {
+    // Optimize I/O
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+
+    if (!(cin >> N >> M)) return 0;
+
+    for (int i = 0; i < N; ++i) {
+        for (int j = 0; j < M; ++j) {
+            cin >> grid[i][j];
+        }
+    }
+
+    // Start recursion from (0, 0)
+    // Note: The problem uses (1,1) indexing, which maps to (0,0) in C++
+    findPaths(0, 0, "");
+
+    return 0;
+}
