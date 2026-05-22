@@ -1,0 +1,42 @@
+#include <iostream>
+#include <vector>
+#include <string>
+
+using namespace std;
+
+
+void generate(vector<string>& res, string current, int open, int close, int n) {
+    // Base case: string is complete
+    if (current.length() == 2 * n) {
+        res.push_back(current);
+        return;
+    }
+
+    // Rule 1: We can add '(' if we haven't reached n
+    if (open < n) {
+        generate(res, current + '(', open + 1, close, n);
+    }
+
+    // Rule 2: We can add ')' only if it doesn't exceed the number of '('
+    if (close < open) {
+        generate(res, current + ')', open, close + 1, n);
+    }
+}
+
+int main() {
+    int n;
+    if (!(cin >> n)) return 0;
+
+    vector<string> results;
+    generate(results, "", 0, 0, n);
+
+    // Print the total number of sequences
+    cout << results.size() << endl;
+
+    // Print each sequence
+    for (const string& s : results) {
+        cout << s << "\n";
+    }
+
+    return 0;
+}
