@@ -1,0 +1,54 @@
+#include <iostream>
+#include <vector>
+#include <string>
+
+using namespace std;
+
+// Mapping of digits to letters based on a standard phone keypad
+const vector<string> mapping = {
+    "",     // 0
+    "",     // 1
+    "abc",  // 2
+    "def",  // 3
+    "ghi",  // 4
+    "jkl",  // 5
+    "mno",  // 6
+    "pqrs", // 7
+    "tuv",  // 8
+    "wxyz"  // 9
+};
+
+void generateCombinations(int index, string& current, const string& digits, vector<string>& result) {
+    // Base case: if the current string length matches digits length, we found a combination
+    if (index == digits.length()) {
+        result.push_back(current);
+        return;
+    }
+
+    string letters = mapping[digits[index] - '0'];
+    for (char c : letters) {
+        current.push_back(c);
+        generateCombinations(index + 1, current, digits, result);
+        current.pop_back(); // Backtrack
+    }
+}
+
+int main() {
+    string s;
+    if (!(cin >> s)) return 0;
+
+    vector<string> result;
+    string current = "";
+    
+    generateCombinations(0, current, s, result);
+
+    // Output the total number of combinations
+    cout << result.size() << endl;
+
+    // Output each combination
+    for (const string& combination : result) {
+        cout << combination << endl;
+    }
+
+    return 0;
+}
