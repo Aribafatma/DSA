@@ -1,0 +1,19 @@
+// approach 1 using map o(n)
+//approach 2 using sum o(n) 
+//approach 3 using xor 
+class Solution {
+public:
+    char findTheDifference(string s, string t) {
+       unordered_map<char, int> mp;
+  for(char &ch: s){
+    mp[ch]++;
+  }
+  for(char &ch : t){
+  mp[ch]--;
+  if(mp[ch] <0){
+  return ch;
+}
+}
+return'x'; //flow wil never come here
+    }
+};
