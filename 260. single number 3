@@ -1,0 +1,28 @@
+//Brute Force Approach
+//Iterate through nums: For each element, update its count in the hash map.
+//Filter Results: Once the hash map is built, iterate through it to find the elements with a count of one.
+//Time Complexity: Both the iterations, one through the array and one through the hash map, are linear in terms of time. Therefore, the total time complexity is O(n), where n is the length of the array.
+//Space Complexity: The space complexity is O(n) as we need to store all the elements in the hash map, which in the worst case, is n/2 + 2 elements (since all elements appear twice except two).
+class Solution {
+public:
+    vector<int> singleNumber(vector<int>& nums) {
+        int xorAll = 0;
+        for (int num : nums) {
+            xorAll ^= num;
+        }
+
+        int setBit = xorAll & -(unsigned int)xorAll;
+
+        int a = 0, b = 0;
+
+        for (int num : nums) {
+            if (num & setBit) {
+                a ^= num;
+            } else {
+                b ^= num;
+            }
+        }
+
+        return {a, b};
+    }
+};
