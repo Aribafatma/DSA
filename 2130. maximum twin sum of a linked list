@@ -1,0 +1,56 @@
+//Approach
+Use slow and fast pointers to find the middle of the linked list.
+Reverse the second half of the list.
+Start one pointer from the beginning and another from the reversed half.
+Add the values of both nodes to get the twin sum.
+Update the maximum answer.
+Move both pointers forward until the second pointer reaches the end.
+Return the maximum twin sum.
+//Complexity
+Time complexity: O(n)
+Space complexity: O(1)
+//Code
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    int pairSum(ListNode* head) {
+        ListNode *slow = head, *fast = head;
+
+        // Find middle
+        while (fast && fast->next) {
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+
+        // Reverse second half
+        ListNode *prev = nullptr;
+        while (slow) {
+            ListNode *nextNode = slow->next;
+            slow->next = prev;
+            prev = slow;
+            slow = nextNode;
+        }
+
+        // Calculate maximum twin sum
+        int ans = 0;
+        ListNode *first = head;
+        ListNode *second = prev;
+
+        while (second) {
+            ans = max(ans, first->val + second->val);
+            first = first->next;
+            second = second->next;
+        }
+
+        return ans;
+    }
+};
