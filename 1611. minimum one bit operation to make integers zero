@@ -1,0 +1,22 @@
+//find the number of steps from n’s Gray code representation to 0’s Gray code (which is 0).
+//gray = n ^ (n >> 1)
+// To reverse the process (i.e., find how far n is from 0 in this operation pattern), we repeatedly XOR it with right-shifted copies of itself until the number becomes 0.
+
+//This gives us a simple iterative formula:f(n) = n ^ (n >> 1) ^ (n >> 2) ^ (n >> 3) ...until n becomes 0.
+//Bitwise reduction loop	O(log n)	O(1)
+//Each bit in n depends on higher bits’ states flipping one can affect all below it.
+//The XOR chain naturally encodes this dependency:
+//Every right shift propagates the dependency down one level.
+//XOR accumulates the parity of changes needed.
+//The final number represents the total flips required to reach 0.
+class Solution {
+public:
+    int minimumOneBitOperations(int n) {
+        int res = 0;
+        while (n) {
+            res ^= n;
+            n >>= 1;
+        }
+        return res;
+    }
+};
