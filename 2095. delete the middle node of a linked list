@@ -1,0 +1,41 @@
+//Middle node
+//The middle node is defined as the item located at the exact halfway point of a list.
+//If the list contains an even number of items,
+the middle node is explicitly the second of the two center items.
+//We can use Floyd s Tortoise and Hare algorithm to delete the middle node of a linked list
+//To delete the node in-place, we must access the node before the middle (predecessor node):
+//So we initialize our slow pointer at the head, the while fast pointer is already two steps ahead.
+//Time Complexity: O(n)
+Space Complexity: O(1)
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* deleteMiddle(ListNode* head) {
+        if (!head->next) return nullptr;
+
+        ListNode* slow = head;
+        ListNode* fast = slow->next->next;
+
+        while (fast && fast->next) {
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+
+        slow->next = slow->next->next;
+        return head;
+    }
+};
+
+
+
+// Memory Deallocation
+// LeetCode environment automatically frees the bypassed middle node
