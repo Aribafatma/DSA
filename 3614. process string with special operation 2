@@ -1,0 +1,51 @@
+//Approach
+Declare ll Len[N]={0} as a global variable where ll=long long & constexpr int N=1e5
+let n=|s|
+Initialize L= as ll
+When L-1<k it's impossible to find the kth char in the proceesed string, so return '.'
+Due to the lengths in len[N],the 2nd loop , a backward trasversal, 
+needs only very simple operations per iteration:
+Implementation using C is also presented which does not use the exta array Len[N]
+Python code is also given.
+Thanks to comments by @Kostiantyn Lazukin, a C++ with branchless loops is made.
+Complexity
+Time complexity:
+O(n)
+Space complexity:
+O(n)→O(1)
+class Solution {
+public:
+    char processStr(string s,long long k) {
+        long long len=0;
+
+        for(char c:s) {
+            if(islower(c)) {
+                len++;
+            } else if(c=='*') {
+                if(len>0) len--;
+            } else if(c=='#') {
+                len*=2;
+            }
+        }
+
+        if(k>=len) return '.';
+
+        for(int i=s.size()-1;i>=0;i--) {
+            char c=s[i];
+
+            if(islower(c)) {
+                if(k==len-1) return c;
+                len--;
+            } else if(c=='*') {
+                len++;
+            } else if(c=='#') {
+                len/=2;
+                k%=len;
+            } else if(c=='%') {
+                k=len-1-k;
+            }
+        }
+
+        return '.';
+    }
+};
