@@ -1,0 +1,23 @@
+class Solution {
+public:
+    int nthSuperUglyNumber(int n, vector<int>& primes) {
+        int m=primes.size();
+        vector<long long>chck(n+2,1);
+        vector<long long>pnt(m,1);
+        for(int i=2;i<=n;i++){
+            long long mn=chck[pnt[0]]*primes[0];
+            for(int j=1;j<m;j++){
+                if(chck[pnt[j]]*primes[j]<mn){
+                    mn=chck[pnt[j]]*primes[j];
+                }
+            }
+            chck[i]=mn;
+            for(int j=0;j<m;j++){
+                if(chck[pnt[j]]*primes[j]==mn){
+                    pnt[j]++;
+                }
+            }
+        }
+        return chck[n];
+    }
+};
