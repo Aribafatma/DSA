@@ -1,0 +1,45 @@
+typedef long long ll;
+class Solution {
+public:
+    string largestNumber(vector<int>& nums) {
+        string ansa = "";
+
+        int n = nums.size();
+
+        // handle all zero
+        for(int i=0;i<n;i++){
+            if(nums[i] != 0)
+            break;
+            if(i==n-1 && nums[n-1] == 0 )
+            return "0";
+        }
+        
+        vector<string>ans;
+
+        for(int i=0;i<n;i++){
+            string s = to_string(nums[i]);
+            ans.push_back(s);
+        }
+
+        for(int i=0;i<n;i++){
+
+            for(int j=0;j<n-1;j++){
+                string a = ans[j];
+                string b = ans[j+1];
+
+                if( a+b > b+a ){
+                    continue;
+                }
+                else{
+                    swap(ans[j+1],ans[j]);
+                }
+
+            }
+
+        }
+        for(auto t : ans){
+            ansa +=t;
+        }
+        return ansa;
+    }
+};
