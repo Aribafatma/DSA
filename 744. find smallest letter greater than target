@@ -1,0 +1,15 @@
+class Solution {
+public:
+    char nextGreatestLetter(vector<char>& letters, char target) {
+        vector<int> nums(26, 0);
+        for (char ch : letters) {
+            nums[ch - 'a']++;
+        }
+        int x = target - 'a';
+        for (int i = x + 1; i < nums.size(); i++) {
+            if (nums[i] > 0)
+                return i + 'a';
+        }
+        return letters[0];
+    }
+};
